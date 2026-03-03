@@ -39,7 +39,7 @@ namespace WebAPICRUD.Controllers
         public IActionResult GetById(int  id)
         {
             if (id == 0) { return BadRequest(); }
-            var product=_dbContext.Products.SingleOrDefault(p => p.Id == id);
+            var product = _dbContext.Products.SingleOrDefault(p => p.Id == id);
             return Ok(product);
 
         }
