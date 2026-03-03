@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebAPICRUD.Data;
+using WebAPICRUD.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,11 +32,34 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionMiddleware>();
+app.UseMiddleware<RequestLoggingMiddleware>();
+app.Use(async (context, next) =>
+{
+    var startTime = DateTime.UtcNow;
+
+    await next();
+
+    var endTime = DateTime.UtcNow;
+    var duration = endTime - startTime;
+
+    Console.WriteLine($"Request took: {duration.TotalMilliseconds} ms");
+});
+app.Use(async (context, next) =>
+{
+    Console.WriteLine($" Inline : {context.Request.Path}");
+    await next();
+}
+);
+
+
+
 app.UseHttpsRedirection();
+app.UseCors("AllowAngular");
 
 app.UseAuthorization();
 
 app.MapControllers();
-app.UseCors("AllowAngular");
+
 
 app.Run();
