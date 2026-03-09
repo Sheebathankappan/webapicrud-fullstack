@@ -7,6 +7,7 @@ using Azure;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.Identity.Client;
 using WebAPICRUD.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPICRUD.Controllers
 {
@@ -20,6 +21,8 @@ namespace WebAPICRUD.Controllers
         {
                 _dbContext = dbContext;
         }
+
+        [Authorize(Roles="Admin")]
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Product product)
