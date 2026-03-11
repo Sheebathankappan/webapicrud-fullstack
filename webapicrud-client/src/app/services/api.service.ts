@@ -13,7 +13,7 @@ export class ApiService {
 
   getAll()
   {
-    return this.http.get(this.baseUrl);
+    return this.http.get<any>(this.baseUrl);
   }
 
   add(data: any)

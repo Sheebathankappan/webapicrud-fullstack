@@ -2,8 +2,8 @@
 {
     public enum PaymentMode
     {
-        Card=1,
-        POD=2,
-        UPI=3
+        POD=1,
+        UPI=2,
+        Card=3
     }
 }

@@ -5,16 +5,15 @@ namespace WebAPICRUD.Services.Factories
 {
     public class PaymentFactory : IPaymentFactory
     {
-        private readonly IEnumerable<IPaymentMethods> _paymentMethods;
-
-        public PaymentFactory(IEnumerable<IPaymentMethods> paymentMethods)
+        private readonly IEnumerable<IPaymentService> _services;
+        public PaymentFactory(IEnumerable<IPaymentService> services)
         {
-            _paymentMethods = paymentMethods;
+            _services = services;
         }
 
-        public IPaymentMethods GetPayMode(PaymentMode paymentMode)
+        public IPaymentService GetPay(PaymentMode paymentMode)
         {
-            return _paymentMethods.First(s => s.paymentMode == paymentMode);
+            return _services.First(s=>s.paymentMode==paymentMode);
         }
     }
 }
