@@ -27,6 +27,7 @@ policy => policy
 .AllowAnyMethod());
 });
 
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -51,9 +52,9 @@ builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<MessageService>();
 builder.Services.AddScoped<INotificationFactory, NotificationFactory>();
 
-builder.Services.AddScoped<IPaymentMethods, CardPay>();
-builder.Services.AddScoped<IPaymentMethods, UPIPay>();
-builder.Services.AddScoped<IPaymentMethods, PODPay>();
+builder.Services.AddScoped<IPaymentService, CardPay>();
+builder.Services.AddScoped<IPaymentService, UPIPay>();
+builder.Services.AddScoped<IPaymentService, PODPay>();
 builder.Services.AddScoped<IPaymentFactory, PaymentFactory>();
 
 builder.Services.AddScoped<IVehicleService, Car>();

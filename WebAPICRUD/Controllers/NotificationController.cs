@@ -10,16 +10,16 @@ namespace WebAPICRUD.Controllers
     public class NotificationController : ControllerBase
     {
         private readonly INotificationFactory _factory;
-        private readonly IPaymentFactory _paymentFactory;
         private readonly IVehicleFactory _vehicleFactory;
+        private readonly IPaymentFactory _paymentFactory;
 
         public NotificationController(INotificationFactory factory,
-            IPaymentFactory paymentFactory, 
-            IVehicleFactory vehicleFactory)
+            IVehicleFactory vehicleFactory,
+            IPaymentFactory paymentFactory)
         {
             _factory = factory;
-            _paymentFactory = paymentFactory;
             _vehicleFactory = vehicleFactory;
+            _paymentFactory = paymentFactory;
         }
 
         [HttpPost]
@@ -33,8 +33,8 @@ namespace WebAPICRUD.Controllers
         [HttpGet]
         public IActionResult Get([FromBody] PaymentDetails pay)
         {
-            var mode = _paymentFactory.GetPayMode(pay.paymentMode);
-            return Ok(mode.DoPay(pay.message));
+            var mode = _paymentFactory.GetPay(pay.PaymentMode);
+            return Ok(mode.DoPay(pay.Message));
         }
 
         [HttpGet("Vehicle")]
