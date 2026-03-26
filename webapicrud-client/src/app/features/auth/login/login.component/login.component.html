@@ -1,0 +1,14 @@
+<h2>Login</h2>
+
+<input type="text" placeHolder="Username" [(ngModel)]="username" />
+<input type="text" placeHolder="Password" [(ngModel)]="password" />
+
+
+<button (click)="login()">Login</button>
+
+<div *ngIf="loading">
+    Loading...
+</div>
+<div *ngIf="error">
+    {{ error }}
+</div>
