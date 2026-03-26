@@ -23,8 +23,11 @@ namespace WebAPICRUD.Controllers
         {
             if(login.Username=="admin" && login.Password=="123")
             {
-                var token = _tokenService.GenerateToken(login.Username);
-                return Ok(token);
+                var tokenString = _tokenService.GenerateToken(login.Username);
+                return Ok(new
+                {
+                    token=tokenString
+                });
             }
             return Unauthorized();
         }
